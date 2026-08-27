@@ -1,17 +1,19 @@
 clear all
-capture log close
 
-* File: MFin604-Case-1-Group-4.do
-* Group 4
+* Sales and Marketing Analysis
 *
-* Reproducibility note:
-* Start Stata from the repository root before running this file. The licensed
-* source workbook is intentionally stored under local-only/ and excluded from
-* Git. See README.md for setup details.
+* The licensed source workbook is not included in this repository.
+* Save an authorized local copy beside this file as WSES-sales-leads.xlsx.
 
-log using "results/stata/MFin604-Case-1-Group-4.log", replace text
+local data_file "WSES-sales-leads.xlsx"
+capture confirm file "`data_file'"
+if _rc {
+    display as error "Data file not found: `data_file'"
+    display as error "See README.md for setup instructions."
+    exit 601
+}
 
-import excel using "local-only/data/IMB695-WSES-Sales-Leads.xlsx", ///
+import excel using "`data_file'", ///
     sheet("Sample Data on Past Sales Leads") firstrow clear
 
 
@@ -99,8 +101,6 @@ graph bar (mean) SalesOutcome, over(Region, label(angle(45))) ///
 * Question 5: Scatter Plot
 * ==============================
 
-varmanage
-
 * Summary Statistics for Profit of Customer
 summarize ProfitofCustomer SalesValue
 
@@ -132,23 +132,23 @@ ttest SalesOutcome if inlist(Region, "India", "UK"), by(Region) unequal
 * Question 7: India vs UK analysis
 * ==============================
 
-* Appendix 7.1 – Chi-square Test of Sales Outcome by Region
+* Appendix 7.1 - Chi-square Test of Sales Outcome by Region
 tabulate Region SalesOutcome, chi2
 
-* Appendix 7.2 – ANOVA Test of Sales Value across Regions
+* Appendix 7.2 - ANOVA Test of Sales Value across Regions
 oneway SalesValueinMillion Region, tabulate
 
-* Appendix 7.3 – Summary of Sales Conversion, Value, and Sample Size by Region
+* Appendix 7.3 - Summary of Sales Conversion, Value, and Sample Size by Region
 preserve
 collapse (mean) Conversion = SalesOutcome SalesValue (count) N = SalesOutcome, by(Region)
 gsort -Conversion
 list Region Conversion SalesValue N, noobs
 restore
 
-* Appendix 7.4 – Chi-square Test of Independence between Product and Sales Outcome
+* Appendix 7.4 - Chi-square Test of Independence between Product and Sales Outcome
 tabulate Product SalesOutcome, chi2
 
-* Appendix 7.5 – Win Rates by Product and Region
+* Appendix 7.5 - Win Rates by Product and Region
 preserve
 gen strL prod_region = Product + "_" + Region
 collapse (sum) wins=SalesOutcome (count) total=SalesOutcome, by(prod_region)
@@ -158,9 +158,7 @@ restore
 
 * Appendix 8.1 - Z-test of conversion rate
 gen wses_gt50 = WSESProportioninJointBid > 50
-label define gt50 0 "WSES ≤ 50%" 1 "WSES > 50%"
+label define gt50 0 "WSES <= 50%" 1 "WSES > 50%"
 label values wses_gt50 gt50
 set linesize 120
 prtest SalesOutcome, by(wses_gt50)
-
-log close
