@@ -1,49 +1,40 @@
-# Sales Profitability and Conversion Analysis
+# Sales and Marketing Analysis
 
-A finance- and data-driven analysis of 1,000 historical B2B sales opportunities. The project evaluates product profitability, regional conversion, deal economics, joint-bid ownership, and sales-confidence signals using Stata and Excel-derived source data.
+Analysis of 1,000 historical sales leads for a software-services company. The project uses Stata and Excel to test marketing hypotheses, evaluate product and regional performance, and turn the results into business recommendations.
 
-## Executive snapshot
+## What the analysis covers
 
-| Metric | Result |
-|---|---:|
-| Historical opportunities | 1,000 |
-| Won opportunities | 481 |
-| Overall conversion rate | 48.1% |
-| Won-deal sales value | $3,894.0 million |
-| Won-deal profit value | $1,804.2 million |
+- Profitability by product line and region
+- Market revenue, profit, and conversion-rate comparisons
+- Customer profit versus deal size
+- India-versus-UK mean comparisons using t-tests
+- Region and product associations using chi-square tests and ANOVA
+- Conversion rates for majority versus minority WSES ownership
+- Sales-team confidence classes versus actual outcomes
+- Marketing expense versus deal profitability
 
 ## Main findings
 
-- **GTMSys is the profit engine**, contributing $844.0 million, or 46.8%, of total won-deal profit value.
-- **The UK is the scale market in this sample**, representing 55.3% of observed opportunities and $1,014.0 million of won-deal profit value. This is opportunity concentration, not external market share.
-- **Conversion differs across regions and products**, while average sales value does not differ significantly across regions.
-- **India and the UK are not statistically distinguishable** on the four tested dimensions: average sales value, successful-deal margin, customer profitability, and conversion.
-- **Majority WSES participation is associated with higher conversion**: 49.8% versus 39.6%, a 10.2 percentage-point difference (p = 0.016).
-- **The broad sales-confidence grouping is not statistically reliable** in this sample (p = 0.190).
-- **Marketing ROI cannot be inferred** from the reported correlation because the marketing-expense proxy and profit value both contain sales value.
+- GTMSys contributed the largest total profit among successful deals.
+- The UK was the largest market by opportunity count and remained strategically important despite an approximately average conversion rate.
+- Conversion rates varied significantly across regions, while average sales values did not show a statistically significant regional difference.
+- India and the UK were not statistically distinguishable on the four tested dimensions.
+- WSES ownership above 50% was associated with a higher conversion rate than ownership at or below 50%.
+- The sales team's confidence class was not a reliable predictor of the actual sales outcome in this sample.
 
-Read the [full analysis report](sales_profitability_and_conversion-analysis.pdf) for the exhibits, statistical tests, limitations, and recommendations.
-
-## Analytical methods
-
-- Descriptive statistics by product and region
-- Welch two-sample t-tests for India versus UK comparisons
-- Chi-square tests for conversion differences by region, product, and confidence group
-- One-way ANOVA for sales value across regions
-- Two-sample proportion test for majority WSES ownership
-- Pearson correlations for deal-economics relationships
+See the [analysis report](sales_profitability_and_conversion-analysis.pdf) for the full interpretation, exhibits, and recommendations.
 
 ## Repository files
 
 ```text
-README.md                                           Project overview
-sales_profitability_and_conversion-analysis.pdf    Revised portfolio report
-sales_profitability_and_conversion-analysis.do     Reproducible Stata analysis
+README.md                                  Project overview
+sales_profitability_and_conversion-analysis.pdf   Final analysis report
+sales_profitability_and_conversion-analysis.do           Stata analysis code
 ```
 
-## Reproduce the analysis
+## Reproduce the Stata analysis
 
-The licensed source workbook is intentionally excluded. With authorized access to the original data:
+The licensed source workbook is not distributed with this repository. With authorized access to the original data:
 
 1. Save a local copy beside the Stata file as `WSES-sales-leads.xlsx`.
 2. Open Stata and set its working directory to this folder.
@@ -53,19 +44,10 @@ The licensed source workbook is intentionally excluded. With authorized access t
    do "sales_profitability_and_conversion-analysis.do"
    ```
 
-The script covers the full analysis presented in the report, including ownership, confidence-class, and marketing-proxy tests.
+The Stata file covers the core statistical analysis through Question 8. Additional analysis for Questions 9 and 10 was completed in Excel and is presented in the report.
 
-## Data, publication, and rights
+## Publication and licensing
 
-This repository contains only the group’s revised analysis report and analysis code. It does **not** include the assigned teaching case, assignment instructions, source workbook, or source data.
+The assigned case, instructions, and source dataset are intentionally excluded because they are third-party course materials. Confirm instructor or publisher permission and agreement from all group contributors before making the repository public.
 
-Underlying teaching material: U Dinesh Kumar, *Testing Marketing Hypotheses at WSES*, Indian Institute of Management Bangalore (2021), supplied under course access for MFin 604. The original materials remain the property of their respective rights holders.
-
-No open-source `LICENSE` file is included. This is intentional: the report and code are presented for academic and portfolio viewing, and no additional permission to reuse, modify, distribute, or sell them is granted beyond GitHub’s Terms of Service and applicable law. Public posting should occur only after all group contributors agree and any required instructor or publisher permission is confirmed.
-
-## Important limitations
-
-- The data are historical and observational; the results do not establish causation.
-- Small regional samples make some conversion estimates unstable.
-- The marketing-expense measure is a formula-based proxy equal to 6% of sales value, not observed campaign spending.
-- The repository cannot reproduce results without an authorized local copy of the excluded source workbook.
+No open-source license has been applied. The repository does not grant redistribution rights for the underlying course materials or data.
