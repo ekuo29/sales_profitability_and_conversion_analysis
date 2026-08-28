@@ -1,4 +1,4 @@
-# Sales and Marketing Analysis
+# Sales Profitability and Conversion Analysis
 
 Analysis of 1,000 historical sales leads for a software-services company. The project uses Stata and Excel to test marketing hypotheses, evaluate product and regional performance, and turn the results into business recommendations.
 
