@@ -2,7 +2,6 @@ clear all
 set more off
 
 * Sales Profitability and Conversion Analysis
-* MFin 604 | Group 4
 *
 * The licensed source workbook is not included in this repository.
 * Save an authorized local copy beside this file as WSES-sales-leads.xlsx.
